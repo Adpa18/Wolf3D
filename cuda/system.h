@@ -24,7 +24,7 @@ extern "C"
 #include <unistd.h>
 #include <X11/X.h>
 #include "mlx/mlx.h"
-# define WIDTH 2560
+# define WIDTH 1080
 # define HEIGHT 1080
 # define LEFT 65361
 # define UP 65362
@@ -72,6 +72,14 @@ typedef struct	t_move
     int		start;
 }		t_move;
 
+typedef struct t_cuda
+{
+    t_vision    *vecs;
+    t_player    *player;
+    char        *map;
+    char        *data;
+}               t_cuda;
+
 typedef struct	t_system
 {
     void		*mlx;
@@ -80,7 +88,8 @@ typedef struct	t_system
     t_image	    image;
     t_player	*player;
     t_vision	*vecs;
-    t_move	     *move;
+    t_move	    *move;
+    t_cuda      *cuda;
 }		         t_system;
 
 #ifdef __cplusplus
@@ -109,13 +118,13 @@ t_player    *init_player();
 t_move      *init_move();
 void        init_vecs(t_vision *vecs, t_player *p, char *map);
 
-void		trace_all(t_system *sys, t_vision *vecs, char *map);
-
 void		my_hook(t_system *sys);
 void		check_map(int file, t_player *p);
 char		*wolf_tab(int file, int size);
 void		trace_back(t_system *sys);
 void		trace_wall(t_system *sys);
+
+void            calc_window(t_system *sys);
 #ifdef __cplusplus
 }
 #endif

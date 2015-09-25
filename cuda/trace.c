@@ -55,7 +55,7 @@ void             trace_wall(t_system *sys)
         {
             color = 0xFFFFFFFF;
             my_pixel_put_to_image(sys->image.data, i, color);
-            my_pixel_put_to_image(sys->image.data, set + a * 4 - sys->image.sizeline * k, color);
+            my_pixel_put_to_image(sys->image.data, set + a * 4 - sys->image.sizeline * k, color);q
             i += sys->image.sizeline;
         }
     }

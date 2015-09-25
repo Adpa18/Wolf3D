@@ -63,14 +63,15 @@ int		key_move(t_system *sys)
         sys->player->y0 -= sys->move->speed * sin(sys->player->angle);
     }
     if (sys->move->left == 1)
-        sys->player->angle += sys->move->speed * 1;
+        sys->player->angle += sys->move->speed;
     if (sys->move->right == 1)
-        sys->player->angle -= sys->move->speed * 1;
+        sys->player->angle -= sys->move->speed;
     if (sys->move->up == 1 || sys->move->left == 1 ||sys->move->right == 1 || sys->move->down == 1 || sys->move->start == 0)
     {
         sys->move->start = 1;
-        init_vecs(sys->vecs, sys->player, sys->map);
-        trace_back(sys);
+        calc_window(sys);
+        // init_vecs(sys->vecs, sys->player, sys->map);
+        // trace_back(sys);
         trace_wall(sys);
         mlx_put_image_to_window(sys->mlx, sys->win, sys->image.img, 0, 0);
     }

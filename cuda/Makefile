@@ -8,14 +8,15 @@
 ## Last update Sat Dec 20 23:41:51 2014 adrien wery
 ##
 
-SRC	= trace.c	\
-	  vision.c	\
-	  str.c		\
-	  mlx.c		\
-	  move.c	\
-	  init.c
+SRC	= 	trace.c		\
+	  	vision.c	\
+	  	str.c		\
+	  	mlx.c		\
+	  	move.c		\
+	  	init.c
 
-CU_SRC = main.cu
+CU_SRC =	cuda.cu	\
+			main.cu
 
 CC	= gcc
 
@@ -33,15 +34,15 @@ OBJ	= $(SRC:.c=.o)
 CU_OBJ	= $(CU_SRC:.cu=.o)
 
 $(NAME): $(OBJ) cuda
-	$(NVCC) $(OBJ) main.o -o $(NAME) $(LFLAGS)
+	$(NVCC) $(OBJ) cuda.o main.o -o $(NAME) $(LFLAGS)
 
 cuda:
-	$(NVCC) -c main.cu
+	$(NVCC) -c $(CU_SRC)
 
 all: $(NAME)
 
 clean:
-	$(RM) $(OBJ) main.o
+	$(RM) $(OBJ) cuda.o main.o
 
 fclean: clean
 	$(RM) $(NAME)
